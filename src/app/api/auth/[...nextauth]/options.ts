@@ -1,6 +1,6 @@
 import {NextAuthOptions} from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import GoogleProvider from "next-auth/providers/google";
 
 
 export const authOptions:NextAuthOptions = {
@@ -26,6 +26,15 @@ export const authOptions:NextAuthOptions = {
 
 
 		  }
+		}),
+
+		// google provider
+		GoogleProvider({
+			id: "google",
+			name: "google",
+			clientId: process.env.GOOGLE_CLIENT_ID || "",
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+
 		})
 	],
 
@@ -49,11 +58,13 @@ export const authOptions:NextAuthOptions = {
 			console.log(token)
 			return session
 		  },
-		  async jwt({ token, user }) {
+		  async jwt({ token, user,account }) {
 			console.log("callback jwt token")
 			console.log(token)
 			console.log('user')
 			console.log(user)
+			console.log('account')
+			console.log(account)
 			return token
 		  }
 	}
