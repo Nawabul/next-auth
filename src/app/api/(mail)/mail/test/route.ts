@@ -12,6 +12,7 @@ export async function POST(req:Request) {
       from: 'Acme <test@softwarehook.in>',
       to: [email],
       subject: `${name} , it is testing`,
+	  //@ts-ignore
       react: EmailTemplate({ firstName: name }),
     });
 
